@@ -19,6 +19,10 @@ const Posts = () => {
                                 <Card.Title>{post.title}</Card.Title>
                                 <div>
                                     <span className='fw-bold'>Author:&nbsp;</span>
+                                    <span>{post.author}</span>
+                                </div>
+                                <div>
+                                    <span className="fw-bold">Published:&nbsp;</span>
                                     <span>{post.publishedDate}</span>
                                 </div>
                                 <Card.Text className="mt-2">

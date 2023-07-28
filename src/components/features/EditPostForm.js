@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getPostById } from '../../Redux/postsRedux';
 import PostForm from './PostForm';
+import formatDate from '../../utils/dateToStr';
 
 const EditPostForm = () => {
 
@@ -31,7 +32,7 @@ const EditPostForm = () => {
               actionText="Edit post"
               title={postData.title}
               author={postData.author}
-              published={postData.publishedDate}
+              published={formatDate(postData.publishedDate)}
               shortDescription={postData.shortDescription}
               content={postData.content} />
         );

@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import { NavLink } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { getAllPosts } from '../../Redux/postsRedux';
+import formatDate from '../../utils/dateToStr';
 
 const Posts = () => {
 
@@ -23,7 +24,7 @@ const Posts = () => {
                                 </div>
                                 <div>
                                     <span className="fw-bold">Published:&nbsp;</span>
-                                    <span>{post.publishedDate}</span>
+                                    <span>{formatDate(post.publishedDate)}</span>
                                 </div>
                                 <Card.Text className="mt-2">
                                     {post.shortDescription}

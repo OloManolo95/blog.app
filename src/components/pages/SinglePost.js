@@ -10,6 +10,7 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from "react-redux";
 import { removePost } from "../../Redux/postsRedux";
+import formatDate from "../../utils/dateToStr";
 
 const SinglePost = () => {
 
@@ -50,11 +51,11 @@ const SinglePost = () => {
                         </div>
                         <div>
                             <span className="fw-bold">Published:&nbsp;</span>
-                            <span>{postData.publishedDate}</span>
+                            <span>{formatDate(postData.publishedDate)}</span>
                         </div>
                     </div>
                     <article>
-                        {postData.content}
+                    <p dangerouslySetInnerHTML={{ __html: postData.content }} />
                     </article>
                 </Col>
             </Row>

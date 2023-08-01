@@ -6,6 +6,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import 'react-quill/dist/quill.snow.css';
 import { useForm } from "react-hook-form";
+import { useSelector } from 'react-redux';
+import { getAllCategories } from '../../Redux/categoriesRedux';
 
 const PostForm = ({action, actionText, ...props}) => {
 
@@ -13,15 +15,22 @@ const PostForm = ({action, actionText, ...props}) => {
         const [author, setAuthor] = useState(props.author || '');
         const [publishedDate, setPublishedDate] = useState(props.publishedDate || '');
         const [shortDescription, setShortDescription] = useState(props.shortDescription || '');
+        const [selectedCategory, setSelectedCategory] = useState(props.category || '');
         const [content, setContent] = useState(props.content || '');
+
         const [contentError, setContentError] = useState(false);
         const [dateError, setDateError] = useState(false);
+        const [categoryError, setCategoryError] = useState(false);
+
+        const categories = useSelector(getAllCategories);
 
         const handleSubmit = e => {
             setContentError(!content)
             setDateError(!publishedDate)
+            setCategoryError(!selectedCategory)
+
             if(content && publishedDate) {
-                action({ title, author, publishedDate, shortDescription, content });
+                action({ title, author, publishedDate, selectedCategory, shortDescription, content });
             }
           };
 
@@ -58,6 +67,23 @@ const PostForm = ({action, actionText, ...props}) => {
              onChange={(date) => setPublishedDate(date)}
             />
             {dateError && <small className="d-block form-text text-danger mt-2">Choose date</small>}
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+            <Form.Label>Category</Form.Label>
+            <Form.Select aria-label='Post category select'
+             defaultValue={selectedCategory}
+             onChange={e => setSelectedCategory(e.target.value)}>
+                <option value="" disabled hidden>Select category...</option>
+                {
+                    categories.map(category => (
+                        <option key={category.id} value={category.name}>
+                            { category.name }
+                        </option>
+                    ))
+                }
+            </Form.Select>
+            {categoryError && <small className="d-block form-text text-danger mt-2">You need to select a category</small>}
         </Form.Group>
 
         <Form.Group className="mb-3">

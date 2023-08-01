@@ -8,6 +8,8 @@ import About from './components/pages/About';
 import NotFound from './components/pages/NotFound';
 import Header from './components/views/Header';
 import Footer from './components/views/Footer';
+import Categories from './components/pages/Categories';
+import Category from './components/pages/Category';
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Route path ="/post/add" element={<AddPost />} />
         <Route path ="/post/edit/:postId" element={<EditPost />} />
         <Route path ="/about" element={<About />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/category/:name" element={<Category />} />
         <Route path ="*" element={<NotFound />} />
       </Routes>
       <Footer />
